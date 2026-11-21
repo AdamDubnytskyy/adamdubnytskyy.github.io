@@ -159,8 +159,8 @@ const latest = (await getCollection('blog', ({ data }) => !data.draft))
         <div class="c-title">Get in <span class="y">touch</span></div>
         <form id="contact-form" novalidate data-email={site.email}>
           <div class="row">
-            <div class="field"><label for="cf-name">Name*</label><input id="cf-name" name="name" type="text" placeholder="Enter your name here" required autocomplete="name" /></div>
-            <div class="field"><label for="cf-email">Email*</label><input id="cf-email" name="email" type="email" placeholder="Enter your email here" required autocomplete="email" /></div>
+            <div class="field"><label for="cf-name">Name</label><input id="cf-name" name="name" type="text" placeholder="Enter your name here" autocomplete="name" /></div>
+            <div class="field"><label for="cf-email">Email</label><input id="cf-email" name="email" type="email" placeholder="Enter your email here" autocomplete="email" /></div>
           </div>
           <div class="field"><label for="cf-msg">Describe your request</label><textarea id="cf-msg" name="message" rows="3" placeholder="Current setup, goals and timeline, so I can prepare for our call"></textarea></div>
           <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
@@ -168,7 +168,6 @@ const latest = (await getCollection('blog', ({ data }) => !data.draft))
           <div id="cf-status" class="status" role="status" aria-live="polite"></div>
           <div class="note">
             Opens a draft email to me; nothing is sent until you press Send.
-            <a id="cf-gmail" href="#">Open in Gmail instead</a>
             {site.booking && <> · <a href={site.booking} rel="noopener">Book a 30-minute call</a></>}
           </div>
         </form>
@@ -182,39 +181,46 @@ const latest = (await getCollection('blog', ({ data }) => !data.draft))
 <script>
   const form = document.getElementById('contact-form') as HTMLFormElement | null;
   const status = document.getElementById('cf-status');
-  const gmail = document.getElementById('cf-gmail');
 
   function draft() {
-    if (!form || !status) return null;
+    if (!form) return null;
     const data = new FormData(form);
     const name = String(data.get('name') || '').trim();
     const email = String(data.get('email') || '').trim();
     const message = String(data.get('message') || '').trim();
-    if (!name || !/^\S+@\S+\.\S+$/.test(email)) {
-      status.textContent = 'Please enter your name and a valid email.';
-      return null;
-    }
-    status.textContent = '';
+    const sig = [name, email && `(${email})`].filter(Boolean).join(' ');
     return {
       to: form.dataset.email || '',
-      subject: `Service request from ${name}`,
-      body: `${message}\n\n— ${name} (${email})`,
+      subject: name ? `Service request from ${name}` : 'Service request',
+      body: sig ? `${message}\n\n— ${sig}` : message,
     };
   }
+
+  function openMailto(d: { to: string; subject: string; body: string }) {
+    window.location.href = `mailto:${d.to}?subject=${encodeURIComponent(d.subject)}&body=${encodeURIComponent(d.body)}`;
+    if (status) status.textContent = 'Opening your email app. Press Send in the draft to deliver it.';
+    setTimeout(() => {
+      if (status && document.hasFocus()) {
+        status.textContent = `Nothing opened? Email ${d.to} directly.`;
+      }
+    }, 2000);
+  }
+
+  function openGmail(d: { to: string; subject: string; body: string }) {
+    const url = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(d.to)}&su=${encodeURIComponent(d.subject)}&body=${encodeURIComponent(d.body)}`;
+    window.open(url, '_blank', 'noopener');
+    if (status) status.textContent = 'Opened Gmail in a new tab. Press Send there to deliver it.';
+  }
+
+  // Phones and tablets have an email app; on desktop most visitors use webmail.
+  const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
   form?.addEventListener('submit', (e) => {
     e.preventDefault();
     const d = draft();
-    if (!d || !status) return;
-    window.location.href = `mailto:${d.to}?subject=${encodeURIComponent(d.subject)}&body=${encodeURIComponent(d.body)}`;
-    status.textContent = 'Opening your email app. Press Send in the draft to deliver it.';
+    if (!d) return;
+    if (isTouch) openMailto(d);
+    else openGmail(d);
   });
 
-  gmail?.addEventListener('click', (e) => {
-    e.preventDefault();
-    const d = draft();
-    if (!d) return;
-    const url = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(d.to)}&su=${encodeURIComponent(d.subject)}&body=${encodeURIComponent(d.body)}`;
-    window.open(url, '_blank', 'noopener');
-  });
 </script>
