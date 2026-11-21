@@ -119,7 +119,8 @@ export const certifications = [
   },
   {
     name: 'GitOps at Scale',
-    issuer: 'Codefresh',
+    issuer: 'Octopus Deploy',
     url: 'https://www.credly.com/badges/808d9098-b587-406c-ad47-fe6812215e2d/public_url',
+    image: '/badges/gitops-at-scale.png',
   },
 ];
