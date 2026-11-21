@@ -1,0 +1,148 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, expertise, packages, layers, writing, steps } from '../data/site';
+const contactHref = site.email ? `mailto:${site.email}` : site.linkedin || site.github;
+---
+<Base>
+  <div class="wrap">
+    <nav aria-label="Main">
+      <div class="brand">{site.name}</div>
+      <div class="links">
+        <a class="plain" href="#expertise">Expertise</a>
+        <a class="plain" href="#packages">Packages</a>
+        <a class="plain" href="#writing">Writing</a>
+        <a class="plain" href="#process">Process</a>
+        <a class="btn primary sm" href="#contact">Book a call</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="loc">KUBERNETES · AWS · LVIV, UKRAINE</div>
+      <h1>I build and upgrade the cloud-native platforms teams run production on.</h1>
+      <div class="t1">PLATFORM ENGINEERING • DEVOPS • SRE</div>
+      <div class="t2">CLOUD • KUBERNETES • SECURITY</div>
+      <div class="bar" aria-hidden="true"></div>
+      <p>Fixed-scope engagements for startups and scale-ups: safe EKS upgrades, secure CI/CD with GitOps delivery, and observability you can trust.</p>
+      <div class="cta">
+        <a class="btn primary" href="#packages">See solution packages →</a>
+        <a class="btn ghost" href="#contact">Talk to me</a>
+      </div>
+    </header>
+
+    <section id="expertise">
+      <div class="head">
+        <div class="eyebrow">Expertise</div>
+        <h2>What I do</h2>
+      </div>
+      <div class="grid">
+        {expertise.map((e) => (
+          <div class="card">
+            <div class="n">{e.n}</div>
+            <h3>{e.title}</h3>
+            <p>{e.text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section id="packages">
+      <div class="head">
+        <div class="eyebrow">Solution packages</div>
+        <h2>Fixed-scope packages</h2>
+      </div>
+      <div class="grid">
+        {packages.map((p) => (
+          <article class:list={['card', 'pkg', { featured: p.featured }]}>
+            <div class="top"></div>
+            <div class="body">
+              <div class="tag">{p.tag}</div>
+              <h3>{p.name}</h3>
+              <p>{p.summary}</p>
+              <div class="groups">
+                {p.groups.map((g) => (
+                  <div class="group">
+                    {g.label && <div class="glabel">{g.label}</div>}
+                    <ul>{g.points.map((pt) => <li>{pt}</li>)}</ul>
+                  </div>
+                ))}
+              </div>
+              <div class="foot">
+                <span class="price">{p.price}</span>
+                <a href="#contact">Request scope →</a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section id="eks-upgrade">
+      <div class="head">
+        <div class="eyebrow">Package 01 — in detail</div>
+        <h2>EKS cluster upgrade, layer by layer</h2>
+        <p class="lede">Every layer of the cluster is upgraded in a deliberate order, so nothing is left running on an unsupported version.</p>
+      </div>
+      <div class="layers">
+        {layers.map((l) => (
+          <div class="layer">
+            <div class="n">{l.n}</div>
+            <div class="info">
+              <h3>{l.title}</h3>
+              <p>{l.text}</p>
+            </div>
+            <div class="chips">{l.chips.map((c) => <span class="chip">{c}</span>)}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section id="writing">
+      <div class="head">
+        <div class="eyebrow">Proof of work</div>
+        <h2>Writing</h2>
+        <p class="lede">Technical articles on the CI/CD and access patterns behind Package 02.</p>
+      </div>
+      <div class="writing">
+        {writing.map((w) => (
+          <a href={w.url} rel="noopener">
+            <span class="t">{w.title}</span>
+            <span class="s">{w.source} ↗</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section id="process">
+      <div class="head">
+        <div class="eyebrow">Process</div>
+        <h2>How an engagement runs</h2>
+      </div>
+      <div class="steps">
+        {steps.map((s) => (
+          <div class="step">
+            <div class="n">{s.n}</div>
+            <h3>{s.title}</h3>
+            <p>{s.text}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <div id="contact" class="contact">
+      <div class="txt">
+        <h2 style="margin-top:0">Planning an EKS upgrade or a delivery pipeline?</h2>
+        <p>Tell me your current setup and goals. I’ll reply with a scoped plan.</p>
+      </div>
+      <div class="cta">
+        <a class="btn primary" href={contactHref}>Book a call →</a>
+        <a class="btn ghost" href={site.github} rel="noopener">GitHub</a>
+        {site.linkedin && <a class="btn ghost" href={site.linkedin} rel="noopener">LinkedIn</a>}
+      </div>
+    </div>
+
+    <footer>
+      <span>© {new Date().getFullYear()} {site.name} · Based in Lviv, Ukraine · Working worldwide</span>
+      <span class="caps">CLOUD • KUBERNETES • SECURITY</span>
+    </footer>
+  </div>
+</Base>
