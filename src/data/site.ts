@@ -6,17 +6,18 @@ export const site = {
   description:
     'Platform Engineering • DevOps • SRE. Cloud • Kubernetes • Security. EKS upgrades, secure CI/CD and GitOps delivery.',
   url: 'https://adamdubnytskyy.github.io',
-  // Leave empty ('') to hide. The primary CTA falls back to GitHub.
-  email: '',
-  linkedin: '',
+  email: 'adam.dubnytskyy@gmail.com',
+  linkedin: 'https://www.linkedin.com/in/oleh-adam-dubnytskyy/',
   github: 'https://github.com/AdamDubnytskyy',
+  // Calendar booking URL (Cal.com, Google Calendar appointment page...). Empty = link hidden.
+  booking: '',
 };
 
 export const expertise = [
   { n: '01', title: 'Platform Engineering', text: 'Internal platforms on Kubernetes that product teams can use without waiting on ops.' },
   { n: '02', title: 'DevOps & CI/CD', text: 'Secure pipelines and GitOps delivery with GitHub Actions, Argo CD and Kargo.' },
   { n: '03', title: 'SRE & Observability', text: 'Metrics, logs and traces with Prometheus, Grafana, Loki, Tempo and OpenTelemetry.' },
-  { n: '04', title: 'Cloud on AWS', text: 'EKS, load balancing, DNS and elastic compute with Karpenter on AMD and ARM nodes.' },
+  { n: '04', title: 'Cloud & Infrastructure as Code', text: 'Terraform-managed AWS infrastructure: EKS, EC2, SQS, S3, CloudFront and secrets, plus Karpenter on AMD and ARM nodes.' },
   { n: '05', title: 'Kubernetes Operations', text: 'Version upgrades and day-2 operations for production clusters.' },
   { n: '06', title: 'Security', text: 'Keyless cloud access with OIDC, least-privilege IAM and Cilium network policies.' },
 ];
@@ -87,14 +88,13 @@ export const packages: Pkg[] = [
     featured: false,
     draft: true,
     name: 'Observability & SRE',
-    summary: '[REPLACE WITH YOUR SCOPE] Telemetry and alerting you can act on.',
+    summary: 'Metrics, logs and traces across your clusters, with alerting you can act on.',
     groups: [
       {
         points: [
           'Prometheus, Grafana, Loki, Tempo and OpenTelemetry',
           'Metrics delivery to ELK with Elastic Agent',
-          '[SCOPE ITEM]',
-          '[SCOPE ITEM]',
+          'Observability stack upgrades and maintenance',
         ],
       },
     ],

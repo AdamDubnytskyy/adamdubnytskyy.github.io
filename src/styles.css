@@ -83,10 +83,29 @@ nav .links a.plain{color:var(--muted)}
 .step h3{font-size:20px}
 .step p{color:var(--muted);font-size:15px}
 
-.contact{margin:0 0 88px;padding:56px 40px;background:var(--surface);border:1px solid var(--border);border-radius:8px;display:flex;flex-wrap:wrap;gap:32px;align-items:center;justify-content:space-between}
-.contact .txt{max-width:620px;display:flex;flex-direction:column;gap:12px}
-.contact p{color:var(--muted);font-size:17px}
-.contact .cta{display:flex;flex-wrap:wrap;gap:16px}
+
+.contact{margin:0 0 88px;padding:56px 40px;background:var(--surface);border:1px solid var(--border);border-radius:8px;display:flex;flex-wrap:wrap;gap:48px}
+.contact .y{color:var(--yellow)}
+.c-left{flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:28px}
+.c-left h2{margin:0;font-size:34px;letter-spacing:.02em;text-transform:uppercase;line-height:1.15}
+.c-left p{color:var(--muted);font-size:16px}
+.c-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:16px;font-size:15px}
+.c-list li{display:flex;gap:12px;align-items:center}
+.c-links{display:flex;flex-wrap:wrap;gap:12px}
+.c-right{flex:1.2 1 400px;min-width:0;display:flex;flex-direction:column;gap:14px}
+.c-title{font-size:24px;font-weight:600}
+#contact-form{border:1px solid rgba(255,213,0,.35);border-radius:12px;padding:28px;display:flex;flex-direction:column;gap:24px;background:var(--bg)}
+#contact-form .row{display:flex;flex-wrap:wrap;gap:24px}
+.field{flex:1 1 200px;min-width:0;display:flex;flex-direction:column;gap:4px}
+.field label{font-size:14px;font-weight:500}
+.field input,.field textarea{border:0;border-bottom:1px solid #404040;background:transparent;color:var(--text);font:inherit;font-size:15px;padding:10px 0;outline:none;width:100%;border-radius:0}
+.field textarea{resize:vertical}
+.field input::placeholder,.field textarea::placeholder{color:var(--muted)}
+.field input:focus,.field textarea:focus{border-bottom-color:var(--yellow)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.send{border:0;font:inherit;font-weight:600;font-size:16px;padding:16px;border-radius:6px;cursor:pointer;width:100%}
+.note{text-align:center;font-size:13px;color:var(--muted)}
+.status{min-height:1.4em;text-align:center;font-size:14px;color:var(--yellow)}
 
 footer{padding:28px 0 48px;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;font-size:13px;color:var(--muted)}
 footer .caps{letter-spacing:.18em}

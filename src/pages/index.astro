@@ -1,7 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
 import { site, expertise, packages, layers, writing, steps } from '../data/site';
-const contactHref = site.email ? `mailto:${site.email}` : site.linkedin || site.github;
 ---
 <Base>
   <div class="wrap">
@@ -22,7 +21,7 @@ const contactHref = site.email ? `mailto:${site.email}` : site.linkedin || site.
       <div class="t1">PLATFORM ENGINEERING • DEVOPS • SRE</div>
       <div class="t2">CLOUD • KUBERNETES • SECURITY</div>
       <div class="bar" aria-hidden="true"></div>
-      <p>Fixed-scope engagements for startups and scale-ups: safe EKS upgrades, secure CI/CD with GitOps delivery, and observability you can trust.</p>
+      <p>Fixed-scope services for Kubernetes upgrades, secure CI/CD and Infrastructure as Code on AWS.</p>
       <div class="cta">
         <a class="btn primary" href="#packages">See solution packages →</a>
         <a class="btn ghost" href="#contact">Talk to me</a>
@@ -129,14 +128,42 @@ const contactHref = site.email ? `mailto:${site.email}` : site.linkedin || site.
     </section>
 
     <div id="contact" class="contact">
-      <div class="txt">
-        <h2 style="margin-top:0">Planning an EKS upgrade or a delivery pipeline?</h2>
-        <p>Tell me your current setup and goals. I’ll reply with a scoped plan.</p>
+      <div class="c-left">
+        <h2>Request a <span class="y">service</span></h2>
+        <p>Cloud-native services, Kubernetes, CI/CD and AWS infrastructure managed with Terraform. Tell me what you need and I’ll prepare for our call.</p>
+        <ul class="c-list">
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFD500" stroke-width="2" aria-hidden="true"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            <span>Lviv, Ukraine · working worldwide</span>
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFD500" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            <a href={`mailto:${site.email}`}>{site.email}</a>
+          </li>
+        </ul>
+        <div class="c-links">
+          <a class="btn ghost sm" href={site.linkedin} rel="noopener">LinkedIn</a>
+          <a class="btn ghost sm" href={site.github} rel="noopener">GitHub</a>
+        </div>
       </div>
-      <div class="cta">
-        <a class="btn primary" href={contactHref}>Book a call →</a>
-        <a class="btn ghost" href={site.github} rel="noopener">GitHub</a>
-        {site.linkedin && <a class="btn ghost" href={site.linkedin} rel="noopener">LinkedIn</a>}
+
+      <div class="c-right">
+        <div class="c-title">Get in <span class="y">touch</span></div>
+        <form id="contact-form" novalidate data-email={site.email}>
+          <div class="row">
+            <div class="field"><label for="cf-name">Name*</label><input id="cf-name" name="name" type="text" placeholder="Enter your name here" required autocomplete="name" /></div>
+            <div class="field"><label for="cf-email">Email*</label><input id="cf-email" name="email" type="email" placeholder="Enter your email here" required autocomplete="email" /></div>
+          </div>
+          <div class="field"><label for="cf-msg">Describe your request</label><textarea id="cf-msg" name="message" rows="3" placeholder="Current setup, goals and timeline, so I can prepare for our call"></textarea></div>
+          <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <button type="submit" class="btn primary send">Send request →</button>
+          <div id="cf-status" class="status" role="status" aria-live="polite"></div>
+          <div class="note">
+            Opens a draft email to me; nothing is sent until you press Send.
+            <a id="cf-gmail" href="#">Open in Gmail instead</a>
+            {site.booking && <> · <a href={site.booking} rel="noopener">Book a 30-minute call</a></>}
+          </div>
+        </form>
       </div>
     </div>
 
@@ -146,3 +173,43 @@ const contactHref = site.email ? `mailto:${site.email}` : site.linkedin || site.
     </footer>
   </div>
 </Base>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const status = document.getElementById('cf-status');
+  const gmail = document.getElementById('cf-gmail');
+
+  function draft() {
+    if (!form || !status) return null;
+    const data = new FormData(form);
+    const name = String(data.get('name') || '').trim();
+    const email = String(data.get('email') || '').trim();
+    const message = String(data.get('message') || '').trim();
+    if (!name || !/^\S+@\S+\.\S+$/.test(email)) {
+      status.textContent = 'Please enter your name and a valid email.';
+      return null;
+    }
+    status.textContent = '';
+    return {
+      to: form.dataset.email || '',
+      subject: `Service request from ${name}`,
+      body: `${message}\n\n— ${name} (${email})`,
+    };
+  }
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const d = draft();
+    if (!d || !status) return;
+    window.location.href = `mailto:${d.to}?subject=${encodeURIComponent(d.subject)}&body=${encodeURIComponent(d.body)}`;
+    status.textContent = 'Opening your email app. Press Send in the draft to deliver it.';
+  });
+
+  gmail?.addEventListener('click', (e) => {
+    e.preventDefault();
+    const d = draft();
+    if (!d) return;
+    const url = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(d.to)}&su=${encodeURIComponent(d.subject)}&body=${encodeURIComponent(d.body)}`;
+    window.open(url, '_blank', 'noopener');
+  });
+</script>
