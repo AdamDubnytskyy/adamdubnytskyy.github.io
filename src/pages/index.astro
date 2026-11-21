@@ -1,19 +1,17 @@
 ---
 import Base from '../layouts/Base.astro';
-import { site, expertise, packages, layers, writing, steps } from '../data/site';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import PostList from '../components/PostList.astro';
+import { getCollection } from 'astro:content';
+import { site, expertise, packages, layers, steps, certifications } from '../data/site';
+const latest = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => (b.data.date?.valueOf() ?? 0) - (a.data.date?.valueOf() ?? 0))
+  .slice(0, 3);
 ---
 <Base>
   <div class="wrap">
-    <nav aria-label="Main">
-      <div class="brand">{site.name}</div>
-      <div class="links">
-        <a class="plain" href="#expertise">Expertise</a>
-        <a class="plain" href="#packages">Packages</a>
-        <a class="plain" href="#writing">Writing</a>
-        <a class="plain" href="#process">Process</a>
-        <a class="btn primary sm" href="#contact">Book a call</a>
-      </div>
-    </nav>
+    <Nav />
 
     <header class="hero">
       <div class="loc">KUBERNETES · AWS · LVIV, UKRAINE</div>
@@ -98,17 +96,11 @@ import { site, expertise, packages, layers, writing, steps } from '../data/site'
     <section id="writing">
       <div class="head">
         <div class="eyebrow">Proof of work</div>
-        <h2>Writing</h2>
-        <p class="lede">Technical articles on the CI/CD and access patterns behind Package 02.</p>
+        <h2>Latest writing</h2>
+        <p class="lede">Technical articles on CI/CD, access and platform work on AWS.</p>
+        <a class="more" href="/blog/">All posts →</a>
       </div>
-      <div class="writing">
-        {writing.map((w) => (
-          <a href={w.url} rel="noopener">
-            <span class="t">{w.title}</span>
-            <span class="s">{w.source} ↗</span>
-          </a>
-        ))}
-      </div>
+      <PostList posts={latest} />
     </section>
 
     <section id="process">
@@ -126,6 +118,22 @@ import { site, expertise, packages, layers, writing, steps } from '../data/site'
         ))}
       </div>
     </section>
+
+    <div class="certs">
+      <div class="certs-text">
+        <h2><span class="y">Certifications</span> &amp; credentials</h2>
+        <p>Verified credentials, each linked to its Credly page.</p>
+      </div>
+      <div class="certs-grid">
+        {certifications.map((c) => (
+          <a href={c.url} target="_blank" rel="noopener">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M32 4 55 17.5v29L32 60 9 46.5v-29z" stroke="#A3A3A3" stroke-width="2"/><path d="m22 33 7 7 13-14" stroke="#FFD500" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span class="cn">{c.name}</span>
+            <span class="ci">{c.issuer}</span>
+          </a>
+        ))}
+      </div>
+    </div>
 
     <div id="contact" class="contact">
       <div class="c-left">
@@ -167,10 +175,7 @@ import { site, expertise, packages, layers, writing, steps } from '../data/site'
       </div>
     </div>
 
-    <footer>
-      <span>© {new Date().getFullYear()} {site.name} · Based in Lviv, Ukraine · Working worldwide</span>
-      <span class="caps">CLOUD • KUBERNETES • SECURITY</span>
-    </footer>
+    <Footer />
   </div>
 </Base>
 

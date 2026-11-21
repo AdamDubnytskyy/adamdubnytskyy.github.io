@@ -83,23 +83,6 @@ export const packages: Pkg[] = [
     ],
     price: 'Fixed price · on request',
   },
-  {
-    tag: 'PACKAGE 03 · DRAFT',
-    featured: false,
-    draft: true,
-    name: 'Observability & SRE',
-    summary: 'Metrics, logs and traces across your clusters, with alerting you can act on.',
-    groups: [
-      {
-        points: [
-          'Prometheus, Grafana, Loki, Tempo and OpenTelemetry',
-          'Metrics delivery to ELK with Elastic Agent',
-          'Observability stack upgrades and maintenance',
-        ],
-      },
-    ],
-    price: 'Fixed price · on request',
-  },
 ];
 
 export const layers = [
@@ -118,22 +101,23 @@ export const layers = [
   },
 ];
 
-export const writing = [
-  {
-    title: 'Configuring Terraform IaC pipelines to provision resources in cloud and Kubernetes',
-    source: 'DevOps.dev',
-    url: 'https://blog.devops.dev/configuring-terraform-iac-pipelines-to-provision-cloud-resources-in-cloud-and-kubernetes-3ff863fe983e',
-  },
-  {
-    title: 'Self-service namespace onboarding on Amazon EKS: access entries and RBAC with GitHub',
-    source: 'Medium · DevOps.dev',
-    url: 'https://medium.com/devops-dev/self-service-namespace-onboarding-on-amazon-eks-automating-access-entries-and-rbac-with-github-74f0347e71e2',
-  },
-];
-
 export const steps = [
   { n: 'STEP 01', title: 'Assess', text: 'Review the current cluster, versions and deprecations.' },
   { n: 'STEP 02', title: 'Plan', text: 'Agree scope, order of changes and how to roll back safely.' },
   { n: 'STEP 03', title: 'Execute', text: 'Change layer by layer, verifying each before the next.' },
   { n: 'STEP 04', title: 'Hand over', text: 'Runbooks and reusable Claude skills so your team can repeat it.' },
+];
+
+// Only list active certifications. Each links to its Credly verification page.
+export const certifications = [
+  {
+    name: 'Certified Kubernetes Application Developer (CKAD)',
+    issuer: 'The Linux Foundation',
+    url: 'https://www.credly.com/badges/16995c51-b1c9-4363-a065-91396b01dabf/public_url',
+  },
+  {
+    name: 'GitOps at Scale',
+    issuer: 'Codefresh',
+    url: 'https://www.credly.com/badges/808d9098-b587-406c-ad47-fe6812215e2d/public_url',
+  },
 ];

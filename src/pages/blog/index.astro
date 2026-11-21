@@ -1,0 +1,35 @@
+---
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import PostList from '../../components/PostList.astro';
+import { getCollection } from 'astro:content';
+import { site } from '../../data/site';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => (b.data.date?.valueOf() ?? 0) - (a.data.date?.valueOf() ?? 0),
+);
+---
+<Base title={`Blog — ${site.name}`} description="Writing on Kubernetes, CI/CD and cloud infrastructure.">
+  <div class="wrap">
+    <Nav current="blog" />
+    <header class="hero" style="padding-bottom:64px">
+      <div class="loc">BLOG</div>
+      <h1>Writing on Kubernetes, CI/CD and cloud infrastructure.</h1>
+      <div class="bar" aria-hidden="true"></div>
+      <p>Practical write-ups from platform work on AWS: what I built, why, and how to repeat it.</p>
+    </header>
+    <section style="padding-top:64px">
+      <div class="head"><div class="eyebrow">All posts</div></div>
+      <PostList posts={posts} />
+    </section>
+    <div class="contact" style="margin-top:0">
+      <div class="c-left">
+        <h2 style="font-size:24px;text-transform:none;letter-spacing:0">Want to discuss one of these topics?</h2>
+        <p>Tell me about your cluster, pipelines or infrastructure.</p>
+      </div>
+      <div class="c-links" style="align-self:center"><a class="btn primary" href="/#contact">Request a service →</a></div>
+    </div>
+    <Footer />
+  </div>
+</Base>

@@ -1,0 +1,23 @@
+---
+const { posts } = Astro.props;
+const fmt = (d?: Date) =>
+  d ? d.toLocaleDateString('en-GB', { year: 'numeric', month: 'short', day: 'numeric' }) : '';
+---
+<div class="writing">
+  {posts.map((p: any) => {
+    const ext = !!p.data.externalUrl;
+    const href = ext ? p.data.externalUrl : `/blog/${p.id}/`;
+    return (
+      <a href={href} target={ext ? '_blank' : undefined} rel={ext ? 'noopener' : undefined}>
+        <span class="meta">
+          <span class="s">{ext ? `${p.data.source ?? 'External'} ↗` : 'On this site'}</span>
+          {p.data.date && <span class="d">{fmt(p.data.date)}</span>}
+        </span>
+        <span class="t">{p.data.title}</span>
+        {p.data.tags.length > 0 && (
+          <span class="tags">{p.data.tags.map((t: string) => <span class="chip">{t}</span>)}</span>
+        )}
+      </a>
+    );
+  })}
+</div>
