@@ -114,6 +114,8 @@ export const certifications = [
     name: 'Certified Kubernetes Application Developer (CKAD)',
     issuer: 'The Linux Foundation',
     url: 'https://www.credly.com/badges/16995c51-b1c9-4363-a065-91396b01dabf/public_url',
+    // Official CKAD badge (white version), self-hosted. Alternatives: ckad-blue.svg, ckad-black.svg.
+    image: '/badges/ckad-white.svg',
   },
   {
     name: 'GitOps at Scale',

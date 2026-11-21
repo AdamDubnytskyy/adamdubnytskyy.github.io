@@ -136,6 +136,7 @@ nav .links a.active{color:var(--yellow);border-bottom:2px solid var(--yellow);pa
 .certs-grid a{flex:1 1 200px;max-width:260px;min-width:0;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;color:var(--text)}
 .certs-grid a:hover{text-decoration:none}
 .certs-grid a:hover svg path:first-child{stroke:var(--yellow)}
+.certs-grid .badge{width:112px;height:112px;object-fit:contain}
 .certs-grid .cn{font-size:15px;font-weight:500;line-height:1.3}
 .certs-grid .ci{font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
 

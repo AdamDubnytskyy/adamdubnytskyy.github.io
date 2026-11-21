@@ -127,7 +127,11 @@ const latest = (await getCollection('blog', ({ data }) => !data.draft))
       <div class="certs-grid">
         {certifications.map((c) => (
           <a href={c.url} target="_blank" rel="noopener">
-            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M32 4 55 17.5v29L32 60 9 46.5v-29z" stroke="#A3A3A3" stroke-width="2"/><path d="m22 33 7 7 13-14" stroke="#FFD500" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            {c.image ? (
+              <img class="badge" src={c.image} alt={`${c.name} badge`} width="112" height="112" loading="lazy" />
+            ) : (
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true"><path d="M32 4 55 17.5v29L32 60 9 46.5v-29z" stroke="#A3A3A3" stroke-width="2"/><path d="m22 33 7 7 13-14" stroke="#FFD500" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            )}
             <span class="cn">{c.name}</span>
             <span class="ci">{c.issuer}</span>
           </a>
