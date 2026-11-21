@@ -51,7 +51,7 @@ export const packages: Pkg[] = [
         ],
       },
     ],
-    price: '[YOUR PRICE]',
+    price: 'Fixed price · on request',
   },
   {
     tag: 'PACKAGE 02 · IN TWO PHASES',
@@ -80,7 +80,7 @@ export const packages: Pkg[] = [
         ],
       },
     ],
-    price: '[YOUR PRICE]',
+    price: 'Fixed price · on request',
   },
   {
     tag: 'PACKAGE 03 · DRAFT',
@@ -98,7 +98,7 @@ export const packages: Pkg[] = [
         ],
       },
     ],
-    price: '[YOUR PRICE]',
+    price: 'Fixed price · on request',
   },
 ];
 
@@ -133,7 +133,7 @@ export const writing = [
 
 export const steps = [
   { n: 'STEP 01', title: 'Assess', text: 'Review the current cluster, versions and deprecations.' },
-  { n: 'STEP 02', title: 'Plan', text: 'Agree scope, order of changes and rollback points.' },
+  { n: 'STEP 02', title: 'Plan', text: 'Agree scope, order of changes and how to roll back safely.' },
   { n: 'STEP 03', title: 'Execute', text: 'Change layer by layer, verifying each before the next.' },
-  { n: 'STEP 04', title: 'Hand over', text: 'Runbooks and documentation so your team can repeat it.' },
+  { n: 'STEP 04', title: 'Hand over', text: 'Runbooks and reusable Claude skills so your team can repeat it.' },
 ];
