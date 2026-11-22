@@ -39,15 +39,17 @@ export const packages: Pkg[] = [
     featured: true,
     name: 'EKS Cluster Upgrade',
     summary:
-      'End-to-end upgrade of a production Amazon EKS cluster: control plane, add-ons, data plane and every platform component.',
+      'End-to-end upgrade of a production Amazon EKS cluster: control plane, add-ons, data plane and every platform component. One Kubernetes version or several in a row.',
     groups: [
       {
         points: [
           'Upgrade readiness review and plan',
+          'Single or multi-version upgrades, run step by step with component compatibility checked at each step',
           'Control plane and EKS add-on upgrades',
           'AMD and ARM node group upgrades',
           'Ingress, autoscaling, networking and observability components',
           'GitOps tooling upgrades (Argo CD, Kargo)',
+          'Rollout designed to minimise downtime of cluster components',
           'Runbook and handover',
         ],
       },
