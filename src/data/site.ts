@@ -54,6 +54,7 @@ export const packages: Pkg[] = [
           'Ingress, autoscaling, networking and observability components',
           'GitOps tooling upgrades (Argo CD, Kargo)',
           'Rollout designed to minimise downtime of cluster components',
+          'Moves clusters off paid extended support onto current versions',
           'Runbook and handover',
         ],
       },
