@@ -4,7 +4,7 @@ export const site = {
   name: 'Oleh Adam Dubnytskyy',
   title: 'Oleh Adam Dubnytskyy — Platform Engineering, DevOps, SRE',
   description:
-    'Platform Engineering • DevOps • SRE. Cloud • Kubernetes • Security. EKS upgrades, secure CI/CD and GitOps delivery.',
+    'Platform engineering, DevOps and SRE consultant in Lviv, Ukraine. Amazon EKS upgrades, Kubernetes operations, secure CI/CD and GitOps, Terraform on AWS.',
   url: 'https://adamdubnytskyy.github.io',
   email: 'adam.dubnytskyy@gmail.com',
   linkedin: 'https://www.linkedin.com/in/oleh-adam-dubnytskyy/',
@@ -14,12 +14,12 @@ export const site = {
 };
 
 export const expertise = [
-  { n: '01', title: 'Platform Engineering', text: 'Internal platforms on Kubernetes that product teams can use without waiting on ops.' },
-  { n: '02', title: 'DevOps & CI/CD', text: 'Secure pipelines and GitOps delivery with GitHub Actions, Argo CD and Kargo.' },
-  { n: '03', title: 'SRE & Observability', text: 'Metrics, logs and traces with Prometheus, Grafana, Loki, Tempo and OpenTelemetry.' },
-  { n: '04', title: 'Cloud & Infrastructure as Code', text: 'Terraform-managed AWS infrastructure: EKS, EC2, SQS, S3, CloudFront and secrets, plus Karpenter on AMD and ARM nodes.' },
-  { n: '05', title: 'Kubernetes Operations', text: 'Version upgrades and day-2 operations for production clusters.' },
-  { n: '06', title: 'Security', text: 'Keyless cloud access with OIDC, least-privilege IAM and Cilium network policies.' },
+  { n: '01', title: 'Platform Engineering', text: 'Product teams get Kubernetes namespaces and CI access on demand, without waiting on ops. Cloud-native services integrated into the cluster and upgraded safely.' },
+  { n: '02', title: 'DevOps & CI/CD', text: 'Fast, repeatable and secure releases: automated CI/CD and GitOps delivery that promotes changes across environments with Git as the audit trail (GitHub Actions, Argo CD, Kargo).' },
+  { n: '03', title: 'SRE & Observability', text: 'Know about problems before your users do. Metrics, logs and traces that make incidents faster to find and fix (Prometheus, Grafana, Loki, Tempo, OpenTelemetry).' },
+  { n: '04', title: 'Cloud & Infrastructure as Code', text: 'Reproducible AWS infrastructure defined as code, so environments stay consistent and reviewable. Autoscaling of workloads and nodes that matches capacity to demand and keeps compute costs down (Terraform, Karpenter, KEDA).' },
+  { n: '05', title: 'Kubernetes Operations', text: 'Production clusters that stay supported, stable and off paid extended support: Amazon EKS upgrades and Day-2 Operations.' },
+  { n: '06', title: 'Security', text: 'Secure by default: no long-lived cloud credentials, least-privilege access with IAM and Kubernetes RBAC, and network isolation between workloads. Minimal distroless container images shrink the attack surface and cut CVE scanner noise (OIDC, IAM, Kubernetes RBAC, Cilium, Distroless).' },
 ];
 
 export type PackageGroup = { label?: string; points: string[] };
@@ -53,7 +53,7 @@ export const packages: Pkg[] = [
           'AMD and ARM node group upgrades',
           'Ingress, autoscaling, networking and observability components',
           'GitOps tooling upgrades (Argo CD, Kargo)',
-          'Rollout designed to minimise downtime of cluster components',
+          'Zero-downtime rollout of cluster components',
           'Moves clusters off paid extended support onto current versions',
           'Runbook and handover',
         ],
@@ -95,7 +95,7 @@ export const packages: Pkg[] = [
 export const layers = [
   { n: '01', title: 'Control plane', text: 'Version upgrade of the managed EKS control plane.', chips: ['EKS control plane'] },
   { n: '02', title: 'Add-ons', text: 'EKS add-ons moved to versions compatible with the new release.', chips: ['EKS managed add-ons'] },
-  { n: '03', title: 'Data plane', text: 'Worker nodes upgraded for both architectures.', chips: ['AMD64 node groups', 'ARM64 node groups'] },
+  { n: '03', title: 'Data plane', text: 'Worker nodes upgraded for both architectures, plus serverless Fargate workloads.', chips: ['AMD64 node groups', 'ARM64 node groups', 'AWS Fargate profiles'] },
   {
     n: '04',
     title: 'Cluster components',
