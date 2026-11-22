@@ -29,6 +29,7 @@ export type Pkg = {
   draft?: boolean;
   name: string;
   summary: string;
+  options?: { label: string; title: string; text: string; highlight?: boolean }[];
   groups: PackageGroup[];
   price: string;
 };
@@ -38,13 +39,16 @@ export const packages: Pkg[] = [
     tag: 'PACKAGE 01 · FLAGSHIP',
     featured: true,
     name: 'EKS Cluster Upgrade',
+    options: [
+      { label: 'OPTION 1', title: 'One Kubernetes version', text: 'A single Kubernetes version upgrade: control plane, add-ons, nodes and every platform component.' },
+      { label: 'OPTION 2', title: 'Several Kubernetes cluster version upgrades', text: 'Moving across several versions is a chain of dependent steps. I plan the path and verify component compatibility at every step, so the cluster stays stable all the way to the target version.', highlight: true },
+    ],
     summary:
-      'End-to-end upgrade of a production Amazon EKS cluster: control plane, add-ons, data plane and every platform component. One Kubernetes version or several in a row.',
+      'End-to-end upgrade of a production Amazon EKS cluster: control plane, add-ons, data plane and every platform component.',
     groups: [
       {
         points: [
           'Upgrade readiness review and plan',
-          'Single or multi-version upgrades, run step by step with component compatibility checked at each step',
           'Control plane and EKS add-on upgrades',
           'AMD and ARM node group upgrades',
           'Ingress, autoscaling, networking and observability components',

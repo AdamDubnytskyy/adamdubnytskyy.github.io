@@ -55,6 +55,17 @@ const latest = (await getCollection('blog', ({ data }) => !data.draft))
               <div class="tag">{p.tag}</div>
               <h3>{p.name}</h3>
               <p>{p.summary}</p>
+              {p.options && (
+                <div class="options">
+                  {p.options.map((o) => (
+                    <div class={o.highlight ? 'note hl' : 'note'}>
+                      <div class="nl">{o.label}</div>
+                      <div class="nt">{o.title}</div>
+                      <p>{o.text}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
               <div class="groups">
                 {p.groups.map((g) => (
                   <div class="group">
