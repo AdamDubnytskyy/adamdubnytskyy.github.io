@@ -11,6 +11,8 @@ export const site = {
   github: 'https://github.com/AdamDubnytskyy',
   // Calendar booking URL (Cal.com, Google Calendar appointment page...). Empty = link hidden.
   booking: '',
+  // Google Analytics 4 Measurement ID, e.g. 'G-XXXXXXXXXX'. Empty = analytics and cookie banner disabled.
+  analyticsId: 'G-LPPQLB5V0C',
 };
 
 export const expertise = [

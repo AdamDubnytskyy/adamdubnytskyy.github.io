@@ -24,5 +24,43 @@ const canonical = new URL(Astro.url.pathname, site.url).href;
   </head>
   <body>
     <slot />
+    {site.analyticsId && (
+      <div id="consent" hidden role="dialog" aria-label="Cookie consent">
+        <p>I use Google Analytics to understand which pages are useful. Analytics cookies are set only if you accept.</p>
+        <div>
+          <button type="button" class="btn primary sm" id="consent-yes">Accept</button>
+          <button type="button" class="btn ghost sm" id="consent-no">Decline</button>
+        </div>
+      </div>
+      <script is:inline define:vars={{ gaId: site.analyticsId }}>
+        (function () {
+          var KEY = 'analytics-consent';
+          window.dataLayer = window.dataLayer || [];
+          function gtag() { dataLayer.push(arguments); }
+          gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied' });
+          function load() {
+            gtag('consent', 'update', { analytics_storage: 'granted' });
+            var s = document.createElement('script');
+            s.async = true;
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=' + gaId;
+            document.head.appendChild(s);
+            gtag('js', new Date());
+            gtag('config', gaId, { anonymize_ip: true });
+          }
+          var saved = null;
+          try { saved = localStorage.getItem(KEY); } catch (e) {}
+          var box = document.getElementById('consent');
+          if (saved === 'yes') { load(); }
+          else if (saved !== 'no') { box.hidden = false; }
+          function choose(v) {
+            try { localStorage.setItem(KEY, v); } catch (e) {}
+            box.hidden = true;
+            if (v === 'yes') load();
+          }
+          document.getElementById('consent-yes').addEventListener('click', function () { choose('yes'); });
+          document.getElementById('consent-no').addEventListener('click', function () { choose('no'); });
+        })();
+      </script>
+    )}
   </body>
 </html>
